@@ -2,10 +2,12 @@ package org.hogwarts.school.service;
 
 import org.hogwarts.school.model.Faculty;
 import org.hogwarts.school.repository.FacultyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FacultyService {
+    @Autowired
     private final FacultyRepository repository;
 
     public FacultyService(FacultyRepository repository) {
@@ -33,5 +35,4 @@ public class FacultyService {
     public Faculty get(Long id) {
         return repository.findById(id).orElse(null); // вывели
     }
-
 }
