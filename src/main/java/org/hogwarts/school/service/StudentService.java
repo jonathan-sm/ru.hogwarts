@@ -1,49 +1,31 @@
 package org.hogwarts.school.service;
 
+import org.hogwarts.school.model.Faculty;
 import org.hogwarts.school.model.Student;
-import org.hogwarts.school.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class StudentService {
-    @Autowired
-    private final StudentRepository repository;
-    public StudentService(StudentRepository repository) {
-        this.repository = repository;
-    }
+import java.util.Collection;
+import java.util.List;
 
-    public Student add(String name, int age) {
-        Student newStudent = new Student( name,age);
-        newStudent = repository.save(newStudent);
-        return newStudent;
-    }
+public interface StudentService {
 
+    Student add(String name, int age);
 
-    public Student update(long id, String name, Integer age) {
-        Student studentForUpdate = get(id);
-        studentForUpdate.setName(name);
-        studentForUpdate.setAge(age);
-        return repository.save(studentForUpdate);
-    }
+    Student update(long id, String name, Integer age);
 
-    public Student delete(Long id) {
-        Student studentForDelete = get(id);
-        repository.deleteById(id);
-        return studentForDelete;
-    }
+    Student delete(Long id);
 
-  public Student get(Long id) {
-      return repository.findById(id).orElse(null); // вывели
-   }
+    Student get(Long id);
 
+    List<Student> getByAge(int age);
 
-//    public List<Student> getByAge(int age) {
-//        return repository.findAllByAge(age);
-//    }
-//
-//
-//    public Collection<Student> getAll() {
-//        return repository.findAll();
-//    }
+    Collection<Student> getAll();
+
+    List<Student> findByAgeBetween(int min, int max);
+
+    Faculty getFaculty(Long studentId);
+
+    List<Student> findByFacultyId(long facultyId);
 
 
 }

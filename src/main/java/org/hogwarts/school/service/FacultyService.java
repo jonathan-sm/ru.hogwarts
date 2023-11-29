@@ -1,14 +1,16 @@
 package org.hogwarts.school.service;
 
 import org.hogwarts.school.model.Faculty;
+import org.hogwarts.school.model.Student;
 import org.hogwarts.school.repository.FacultyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FacultyService {
-    @Autowired
     private final FacultyRepository repository;
+    private StudentService studentService;
 
     public FacultyService(FacultyRepository repository) {
         this.repository = repository;
@@ -35,4 +37,16 @@ public class FacultyService {
     public Faculty get(Long id) {
         return repository.findById(id).orElse(null); // вывели
     }
+    public List<Faculty> getByColor(String color) {
+        return repository.findAllByColor(color);
+    }
+
+    public List<Faculty> getByColorOrName(String param) {
+        return repository.findByColorContainsIgnoreCaseOrNameContainsIgnoreCase(param, param);
+    }
+
+    public List<Student> getStudents(Long id) {
+        return studentService.findByFacultyId(id);
+    }
+
 }
