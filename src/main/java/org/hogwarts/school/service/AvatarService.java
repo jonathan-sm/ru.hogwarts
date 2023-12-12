@@ -5,6 +5,8 @@ import org.hogwarts.school.model.Student;
 import org.hogwarts.school.repository.AvatarRepository;
 import org.hogwarts.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -80,5 +82,8 @@ public class AvatarService {
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
         headers.setContentLength(avatar.getData().length);
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+    }
+    public Page<Avatar> getWithPageAvatar(Integer page, Integer count) {
+        return avatarRepository.findAll(PageRequest.of(page-1, count));
     }
 }

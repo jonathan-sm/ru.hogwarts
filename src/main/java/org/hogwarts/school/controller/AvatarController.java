@@ -1,5 +1,5 @@
 package org.hogwarts.school.controller;
-
+import org.springframework.data.domain.Page;
 import org.hogwarts.school.service.AvatarService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
