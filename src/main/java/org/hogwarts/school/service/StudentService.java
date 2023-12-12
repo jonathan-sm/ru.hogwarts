@@ -2,7 +2,6 @@ package org.hogwarts.school.service;
 
 import org.hogwarts.school.model.Faculty;
 import org.hogwarts.school.model.Student;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +25,11 @@ public interface StudentService {
     Faculty getFaculty(Long studentId);
 
     List<Student> findByFacultyId(long facultyId);
+    Integer getCount();
+
+    Double getAvgAge();
+
+    List<Student> getLastFiveStudent();
 
 
 }
