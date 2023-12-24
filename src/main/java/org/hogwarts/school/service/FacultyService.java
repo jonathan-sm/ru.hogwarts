@@ -58,5 +58,11 @@ public class FacultyService {
         logger.info("Был вызван метод getStudents");
         return studentService.findByFacultyId(id);
     }
-
+    public String getLongNameFaculty(){
+        return repository.findAll()
+                .stream()
+                .map(Faculty::getName)
+                .max((name1, name2) -> name1.length() - name2.length())
+                .get();
+    }
 }

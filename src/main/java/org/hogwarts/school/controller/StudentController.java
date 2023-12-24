@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
-public class StudentController {
+public class  StudentController {
 
         private final StudentService studentService;
 
@@ -69,6 +69,14 @@ public class StudentController {
     @GetMapping("/last-five-student")
     public List<Student> getLastFiveStudent() {
         return studentService.getLastFiveStudent();
+    }
+    @GetMapping("/names-start-with-a")
+    public List<String> getAllNamesStartWithA() {
+        return studentService.getAllNamesStartWithA();
+    }
+    @GetMapping("/avg-age-with-stream")
+    public double getAvgAgeWithStream() {
+        return studentService.getAvgAgeWithStream();
     }
 }
 

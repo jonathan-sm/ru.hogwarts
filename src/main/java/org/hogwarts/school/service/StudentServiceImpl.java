@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -90,6 +91,22 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getLastFiveStudent(){
         logger.info("Был вызван метод getLastFiveStudent");
         return studentRepository.getLastFiveStudent();
+    }
+    public List<String> getAllNamesStartWithA() {
+        String firstSymbol = "A";
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(name -> name.startsWith(firstSymbol))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double getAvgAgeWithStream() {
+        return studentRepository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse(-1);
     }
 
 
